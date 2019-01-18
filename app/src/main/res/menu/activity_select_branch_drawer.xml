@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/cse_dep"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="CSE" />
+        <item
+            android:id="@+id/it_dep"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="IT" />
+        <item
+            android:id="@+id/ece_dep"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="ECE" />
+        <item
+            android:id="@+id/mae_dep"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="MAE" />
+    </group>
+
+    <item android:title="import attendance">
+        <menu>
+            <item
+                android:id="@+id/excel_sheet"
+                android:icon="@drawable/ic_menu_share"
+                android:title="excel" />
+            <item
+                android:id="@+id/pdf_file"
+                android:icon="@drawable/ic_menu_send"
+                android:title="PDF" />
+        </menu>
+    </item>
+
+</menu>
