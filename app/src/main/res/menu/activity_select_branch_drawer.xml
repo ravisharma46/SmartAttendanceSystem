@@ -22,7 +22,7 @@
             android:title="MAE" />
     </group>
 
-    <item android:title="import attendance">
+    <item android:title="Export attendance">
         <menu>
             <item
                 android:id="@+id/excel_sheet"

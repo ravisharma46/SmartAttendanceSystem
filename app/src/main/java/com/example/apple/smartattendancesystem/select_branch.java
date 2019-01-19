@@ -84,7 +84,12 @@ public class select_branch extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.cse_dep) {
-            // Handle the camera action
+
+            CseFragment cseFragment=new CseFragment();
+            FragmentManager manager= getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.content_layout,
+                    cseFragment,
+                    cseFragment.getTag()).commit();
 
         } else if (id == R.id.it_dep) {
 

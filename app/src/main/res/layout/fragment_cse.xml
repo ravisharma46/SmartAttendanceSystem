@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="375sp"
     android:layout_marginTop="35sp"
-    tools:context=".EceFragment">
+    tools:context=".CseFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -99,14 +99,15 @@
         android:textStyle="bold"
         android:textSize="18sp"/>
 
-<Button
-    android:id="@+id/start_scan_ece"
-    android:layout_width="200sp"
-    android:layout_height="46sp"
-    android:layout_marginTop="260sp"
-    android:layout_marginLeft="80sp"
-    android:text="start Scan"
-    android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/start_scan_ece"
+        android:layout_width="200sp"
+        android:layout_height="46sp"
+        android:layout_marginTop="260sp"
+        android:layout_marginLeft="80sp"
+        android:text="start Scan"
+        android:textSize="20sp"/>
 
 
 

@@ -5,38 +5,32 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.security.PrivateKey;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EceFragment extends Fragment {
+public class CseFragment extends Fragment {
 
 
     private Spinner spinner_group,spinner_year,spinner_class;
-    private  String select_ece_group,select_ece_year,select_ece_classMode;
+    private  String select_cse_group,select_cse_year,select_cse_classMode;
     private TextView date,time;
     private DatePickerDialog datePickerDialog;
     private String format = "";
@@ -45,27 +39,28 @@ public class EceFragment extends Fragment {
     private String time_1;
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view=inflater.inflate(R.layout.fragment_cse, container, false);
 
-        View view= inflater.inflate(R.layout.fragment_ece, container, false);
+        spinner_group = (Spinner) view.findViewById(R.id.spinner_select_group);
+        spinner_year=(Spinner)view.findViewById(R.id.spinner_select_year);
+        spinner_class=(Spinner)view.findViewById(R.id.spinner_select_class);
 
-         spinner_group = (Spinner) view.findViewById(R.id.spinner_select_group);
-         spinner_year=(Spinner)view.findViewById(R.id.spinner_select_year);
-         spinner_class=(Spinner)view.findViewById(R.id.spinner_select_class);
+        date=(TextView) view.findViewById(R.id.date_picker);
+        time=(TextView) view.findViewById(R.id.time_picker);
+        scan=(Button)view.findViewById(R.id.start_scan_ece);
 
-         date=(TextView) view.findViewById(R.id.date_picker);
-         time=(TextView) view.findViewById(R.id.time_picker);
-         scan=(Button)view.findViewById(R.id.start_scan_ece);
-
-         final String Theory_class[]={"E123","E456","E789"};
-         final String lab_class[]={"E1","E2","E3","E4","E5","E6","E7","E8","E9"};
-
+        final String Theory_class[]={"C123","C456","C789","C10 11 12"};
+        final String lab_class[]={"C1","C2","C3","C4","C5","C6","C7","C8","C9","C10","C11","C12"};
 
 
-         // create adapter array for select year
+
+        // create adapter array for select year
         ArrayAdapter<String> adapter_year= new ArrayAdapter<String>(this.getActivity(),
                 android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.ece_select_year));
 
@@ -97,8 +92,8 @@ public class EceFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
 
-                select_ece_year=parentView.getItemAtPosition(position).toString();
-                Toast.makeText(getActivity(),"You have selected "+select_ece_year,Toast.LENGTH_SHORT).show();
+                select_cse_year=parentView.getItemAtPosition(position).toString();
+                Toast.makeText(getActivity(),"You have selected "+select_cse_year,Toast.LENGTH_SHORT).show();
 
 
             }
@@ -123,11 +118,11 @@ public class EceFragment extends Fragment {
                 if(spinner_class.getSelectedItemPosition()==0){
 
                     ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_1,Theory_class);
+                            android.R.layout.simple_list_item_1,Theory_class);
                     adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                     spinner_group.setAdapter(adapter_group);
+                    spinner_group.setAdapter(adapter_group);
                 }
-              else  {
+                else  {
                     ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
                             android.R.layout.simple_list_item_1,lab_class);
                     adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -137,9 +132,9 @@ public class EceFragment extends Fragment {
 
 
 
-                select_ece_classMode=parentView.getItemAtPosition(position).toString();
+                select_cse_classMode=parentView.getItemAtPosition(position).toString();
 
-                Toast.makeText(getActivity(),"You have selected "+select_ece_classMode+" Class",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"You have selected "+select_cse_classMode+" Class",Toast.LENGTH_SHORT).show();
 
 
 
@@ -164,8 +159,8 @@ public class EceFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
 
-                select_ece_group=parentView.getItemAtPosition(position).toString();
-                Toast.makeText(getActivity(),"You have selected "+select_ece_group+" group",Toast.LENGTH_SHORT).show();
+                select_cse_group=parentView.getItemAtPosition(position).toString();
+                Toast.makeText(getActivity(),"You have selected "+select_cse_group+" group",Toast.LENGTH_SHORT).show();
 
 
             }
@@ -196,8 +191,8 @@ public class EceFragment extends Fragment {
                                           int monthOfYear, int dayOfMonth) {
                         date.setText(dayOfMonth + "/"
                                 + (monthOfYear + 1) + "/" + year);
-                        date_1=date.getText().toString();
 
+                        date_1=date.getText().toString();
                     }
                 }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -213,7 +208,7 @@ public class EceFragment extends Fragment {
                 Calendar mcurrentTime = Calendar.getInstance();
                 int hour = mcurrentTime.get(Calendar.HOUR);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
-             //  final   int str=mcurrentTime.get(Calendar.AM_PM);
+                //  final   int str=mcurrentTime.get(Calendar.AM_PM);
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
@@ -239,10 +234,7 @@ public class EceFragment extends Fragment {
                         else {
                             time.setText(selectedHour + ":" + selectedMinute+" "+format);
                         }
-
                         time_1=time.getText().toString();
-
-
                     }
                 }, hour, minute, false);// 12 hour time
                 mTimePicker.setTitle("Select Time");
@@ -251,14 +243,12 @@ public class EceFragment extends Fragment {
             }
         });
 
-
-
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                final String[] items = {"Year    "+select_ece_year, "Class    "+select_ece_classMode,
-                        "Group    "+select_ece_group, "Date    "+date_1,"Time    "+time_1};
+                final String[] items = {"Year    "+select_cse_year, "Class    "+select_cse_classMode,
+                        "Group    "+select_cse_group, "Date    "+date_1,"Time    "+time_1};
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Selected attributes")
 
@@ -270,25 +260,24 @@ public class EceFragment extends Fragment {
 
                 builder.setPositiveButton("Start Scan", null);
                 builder.setNegativeButton("Edit", null);
-              //  builder.setNeutralButton("CANCEL", null);builder.setPositiveButtonIcon(getResources().getDrawable(android.R.drawable.ic_menu_call, getTheme()));
-              //  builder.setIcon(getResources().getDrawable(R.drawable.jd, getTheme()));
+                builder.setNeutralButton("CANCEL", null);
+                //   builder.setPositiveButtonIcon(getResources().getDrawable(android.R.drawable.ic_menu_call, getTheme()));
+                //  builder.setIcon(getResources().getDrawable(R.drawable.jd, getTheme()));
 
                 AlertDialog alertDialog = builder.create();
 
                 alertDialog.show();
 
                 Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-               // button.setBackgroundColor(Color.BLACK);
+                // button.setBackgroundColor(Color.BLACK);
                 button.setPadding(0, 0, 20, 0);
-               // button.setTextColor(Color.WHITE);
+                // button.setTextColor(Color.WHITE);
             }
         });
 
 
 
         return view;
-
     }
-
 
 }
