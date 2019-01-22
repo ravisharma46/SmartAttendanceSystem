@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/dialog_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        tools:context=".MainActivity"
+        android:background="#e9f1ba"
+        >
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD ROLL NO. BELOW"
+            android:padding="5dp"
+            android:background="#d5dda6"
+            android:textSize="15dp"
+            />
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=" Enter Roll no."
+            android:textSize="15dp"
+            android:inputType="number"
+            android:layout_below="@id/dialog_title"
+            />
+        <Button
+            android:id="@+id/dialog_positive_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD"
+            android:layout_alignParentRight="true"
+            android:background="#dde5ad"
+            android:layout_below="@id/et_name"
+            />
+        <Button
+            android:id="@+id/dialog_negative_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:layout_toLeftOf="@id/dialog_positive_btn"
+            android:background="#dde5ad"
+            android:layout_marginRight="3dp"
+            android:layout_alignBaseline="@id/dialog_positive_btn"
+            />
+
+
+    </RelativeLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
