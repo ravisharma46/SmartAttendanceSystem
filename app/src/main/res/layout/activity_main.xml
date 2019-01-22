@@ -22,21 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/passKey_text"
-        android:layout_width="0sp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8sp"
-        android:ems="10"
-        android:hint="passkey"
-        android:inputType="textPersonName"
-        android:paddingLeft="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pass_text" />
+
 
     <EditText
         android:id="@+id/pass_text"
@@ -58,11 +44,14 @@
         android:id="@+id/register_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36sp"
-        android:text="Button"
+        android:layout_marginTop="8sp"
+        android:layout_marginBottom="268sp"
+        android:text="Sign in"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passKey_text" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.898" />
 
 
 </android.support.constraint.ConstraintLayout>
