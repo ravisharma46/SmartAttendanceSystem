@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.security.PrivateKey;
 import java.util.Arrays;
@@ -45,6 +49,13 @@ public class EceFragment extends Fragment {
     private String time_1;
 
 
+    private String scanContent;
+
+    public EceFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,8 +71,13 @@ public class EceFragment extends Fragment {
          time=(TextView) view.findViewById(R.id.time_picker);
          scan=(Button)view.findViewById(R.id.start_scan_ece);
 
+       // data.setText("Content: " + scanContent);
+
          final String Theory_class[]={"E123","E456","E789"};
          final String lab_class[]={"E1","E2","E3","E4","E5","E6","E7","E8","E9"};
+
+
+
 
 
 
@@ -255,8 +271,15 @@ public class EceFragment extends Fragment {
 
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(final View view) {
+                if(date_1==null){
+                    Toast.makeText(getActivity(),"Please Select Date",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(time_1==null){
+                    Toast.makeText(getActivity(),"Please Select Time",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 final String[] items = {"Year    "+select_ece_year, "Class    "+select_ece_classMode,
                         "Group    "+select_ece_group, "Date    "+date_1,"Time    "+time_1};
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -267,11 +290,17 @@ public class EceFragment extends Fragment {
                                 Toast.makeText(getActivity(), items[which] + " is clicked", Toast.LENGTH_SHORT).show();
                             }
                         });
-
-                builder.setPositiveButton("Start Scan", null);
+                builder.setPositiveButton("Start Scan", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startScan(view);
+                    }
+                });
                 builder.setNegativeButton("Edit", null);
+                builder.setNeutralButton("CANCEL", null);
               //  builder.setNeutralButton("CANCEL", null);builder.setPositiveButtonIcon(getResources().getDrawable(android.R.drawable.ic_menu_call, getTheme()));
               //  builder.setIcon(getResources().getDrawable(R.drawable.jd, getTheme()));
+
 
                 AlertDialog alertDialog = builder.create();
 
@@ -285,10 +314,16 @@ public class EceFragment extends Fragment {
         });
 
 
-
         return view;
 
     }
+    public void startScan(View view){
+
+        Intent intent=new Intent(getActivity(),scanningActivity.class);
+        startActivity(intent);
+
+    }
+
 
 
 }
