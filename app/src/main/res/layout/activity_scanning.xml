@@ -6,23 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".scanningActivity">
 
-    <Button
-        android:id="@+id/scan"
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/barcode_scanner"
         android:layout_width="match_parent"
-        android:layout_height="42sp"
-        android:layout_marginTop="16dp"
-        android:text="Scan"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:zxing_preview_scaling_strategy="fitXY"
+        app:zxing_use_texture_view="false" />
 
 
     <ListView
         android:id="@+id/show_rollno"
         android:layout_width="match_parent"
-        android:layout_marginTop="80sp"
-        android:layout_height="match_parent"/>
+        android:layout_height="307dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_rollno"

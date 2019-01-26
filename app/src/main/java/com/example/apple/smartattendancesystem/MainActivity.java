@@ -53,17 +53,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                try {
-
-                    url = new URL("http://192.168.43.212:7000/home/Teacherlogin");
-                } catch (MalformedURLException e) {
-                    Log.e("assign","problem");
-                    // Toast.makeText(LoginActivity.this, "Connection Failed", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
+                /////////////////
+                Intent intent=new Intent (MainActivity.this,select_branch.class);
+                startActivity(intent);
+                ////////////
 
 
-                new SendPostRequest().execute();
+
+
+//                try {
+//
+//                    url = new URL("http://192.168.43.212:7000/home/Teacherlogin");
+//                } catch (MalformedURLException e) {
+//                    Log.e("assign","problem");
+//                    // Toast.makeText(LoginActivity.this, "Connection Failed", Toast.LENGTH_SHORT).show();
+//                    e.printStackTrace();
+//                }
+//
+//
+//                new SendPostRequest().execute();
             }
         });
 
@@ -72,163 +80,163 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class SendPostRequest extends AsyncTask<String, Void, String> {
-
-
-
-        protected void onPreExecute(){}
-
-        protected String doInBackground(String... arg0) {
-            try {
-                //username = user_id.getText().toString();
-                username=user_id.getText().toString();
-                password = user_password.getText().toString();
-                JSONObject postDataParams = new JSONObject();
-                postDataParams.put("username", username);
-                postDataParams.put("password", password);
-                Log.e("params", postDataParams.toString());
-               /// editor= sharedPreferences.edit();
-               SharedPreferences.Editor editor = getSharedPreferences("Teachers", MODE_PRIVATE).edit();
-               // editor.putString("Key","0");
-
-                editor.putString("sharedTname", username);
-                editor.apply();
-               // editor.commit();
-                Log.i("TAG:___",editor.toString());
-                HttpURLConnection conn = null;
-                try {
-
-                    conn = (HttpURLConnection) url.openConnection();
-                    Log.e("cp1","connectionin");
-                    //Toast.makeText(LoginActivity.this,"connevtion success",Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    //Toast.makeText(LoginActivity.this,"connevtion failed",Toast.LENGTH_SHORT).show();
-                    Log.e("connectionError", e.getMessage());
-                }
-                Log.i("TAG","connection built here");
-                conn.setReadTimeout(15000 /* milliseconds */);
-                conn.setConnectTimeout(15000 /* milliseconds */);
-                conn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-////////////////////////////////////////////////////////////
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(getPostDataString(postDataParams));
-                Log.i("TAG","connection reached 1here");
-                writer.flush();
-                writer.close();
-                os.close();
-
-                int responseCode = conn.getResponseCode();
-
-                if (responseCode == HttpsURLConnection.HTTP_OK) {
-
-                    Log.i("TAG","connection reached 2here");
-                    BufferedReader in = new BufferedReader(
-                            new InputStreamReader(
-                                    conn.getInputStream()));
-                    StringBuffer sb = new StringBuffer("");
-                    String line = "";
-
-                    while ((line = in.readLine()) != null) {
-
-                        sb.append(line);
-                        break;
-                    }
-                    Log.i("TAG","connection reached 3here");
-
-                    in.close();
-                    return sb.toString();
-                } else {
-                    return new String("false : " + responseCode);
-                }
-            }
-            catch(Exception e){
-                return new String("Exception: " + e.getMessage());
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            String y="";
-            String d="";
-            try {
-                JSONObject json = new JSONObject(s);
-                y=json.getString("error");
-                d=json.getString("data");
-
-                Log.e("value of y",y);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            Log.e("servers",s);
-
-
-            if(y.equals("1")){
-                user_id.setText("");
-                user_password.setText("");
-                Toast.makeText(getApplicationContext(), d, Toast.LENGTH_SHORT).show();
-
-            }
-            else if( y.equals("2")){
-               // user_id.setText("");
-              //  user_password.setText("");
-                Toast.makeText(getApplicationContext(), "Welcome Teacher", Toast.LENGTH_SHORT).show();
-                Log.i("TAG","connection reached here");
-                Intent intent=new Intent (MainActivity.this,select_branch.class);
-                startActivity(intent);
-            }
-            else{
-
-            }
-
-
-        }
-    }
-
-
-    public String getPostDataString(JSONObject params) throws Exception {
-
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-
-        Iterator<String> itr = params.keys();
-
-        while(itr.hasNext()){
-
-            String key= itr.next();
-            Object value = params.get(key);
-
-            if (first)
-                first = false;
-            else
-                result.append("&");
-
-            result.append(URLEncoder.encode(key, "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
-
-        }
-        return result.toString();
-    }
-
-
-
-
-    @Override
-    public void onBackPressed() {
-
-
-    }
-
-
-    @Override
-    protected void onStart() {
-
-
-
-        super.onStart();
-    }
+//    public class SendPostRequest extends AsyncTask<String, Void, String> {
+//
+//
+//
+//        protected void onPreExecute(){}
+//
+//        protected String doInBackground(String... arg0) {
+//            try {
+//                //username = user_id.getText().toString();
+//                username=user_id.getText().toString();
+//                password = user_password.getText().toString();
+//                JSONObject postDataParams = new JSONObject();
+//                postDataParams.put("username", username);
+//                postDataParams.put("password", password);
+//                Log.e("params", postDataParams.toString());
+//               /// editor= sharedPreferences.edit();
+//               SharedPreferences.Editor editor = getSharedPreferences("Teachers", MODE_PRIVATE).edit();
+//               // editor.putString("Key","0");
+//
+//                editor.putString("sharedTname", username);
+//                editor.apply();
+//               // editor.commit();
+//                Log.i("TAG:___",editor.toString());
+//                HttpURLConnection conn = null;
+//                try {
+//
+//                    conn = (HttpURLConnection) url.openConnection();
+//                    Log.e("cp1","connectionin");
+//                    //Toast.makeText(LoginActivity.this,"connevtion success",Toast.LENGTH_SHORT).show();
+//                } catch (Exception e) {
+//                    //Toast.makeText(LoginActivity.this,"connevtion failed",Toast.LENGTH_SHORT).show();
+//                    Log.e("connectionError", e.getMessage());
+//                }
+//                Log.i("TAG","connection built here");
+//                conn.setReadTimeout(15000 /* milliseconds */);
+//                conn.setConnectTimeout(15000 /* milliseconds */);
+//                conn.setRequestMethod("POST");
+//                conn.setDoInput(true);
+//                conn.setDoOutput(true);
+//////////////////////////////////////////////////////////////
+//                OutputStream os = conn.getOutputStream();
+//                BufferedWriter writer = new BufferedWriter(
+//                        new OutputStreamWriter(os, "UTF-8"));
+//                writer.write(getPostDataString(postDataParams));
+//                Log.i("TAG","connection reached 1here");
+//                writer.flush();
+//                writer.close();
+//                os.close();
+//
+//                int responseCode = conn.getResponseCode();
+//
+//                if (responseCode == HttpsURLConnection.HTTP_OK) {
+//
+//                    Log.i("TAG","connection reached 2here");
+//                    BufferedReader in = new BufferedReader(
+//                            new InputStreamReader(
+//                                    conn.getInputStream()));
+//                    StringBuffer sb = new StringBuffer("");
+//                    String line = "";
+//
+//                    while ((line = in.readLine()) != null) {
+//
+//                        sb.append(line);
+//                        break;
+//                    }
+//                    Log.i("TAG","connection reached 3here");
+//
+//                    in.close();
+//                    return sb.toString();
+//                } else {
+//                    return new String("false : " + responseCode);
+//                }
+//            }
+//            catch(Exception e){
+//                return new String("Exception: " + e.getMessage());
+//            }
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            String y="";
+//            String d="";
+//            try {
+//                JSONObject json = new JSONObject(s);
+//                y=json.getString("error");
+//                d=json.getString("data");
+//
+//                Log.e("value of y",y);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            Log.e("servers",s);
+//
+//
+//            if(y.equals("1")){
+//                user_id.setText("");
+//                user_password.setText("");
+//                Toast.makeText(getApplicationContext(), d, Toast.LENGTH_SHORT).show();
+//
+//            }
+//            else if( y.equals("2")){
+//               // user_id.setText("");
+//              //  user_password.setText("");
+//                Toast.makeText(getApplicationContext(), "Welcome Teacher", Toast.LENGTH_SHORT).show();
+//                Log.i("TAG","connection reached here");
+//                Intent intent=new Intent (MainActivity.this,select_branch.class);
+//                startActivity(intent);
+//            }
+//            else{
+//
+//            }
+//
+//
+//        }
+//    }
+//
+//
+//    public String getPostDataString(JSONObject params) throws Exception {
+//
+//        StringBuilder result = new StringBuilder();
+//        boolean first = true;
+//
+//        Iterator<String> itr = params.keys();
+//
+//        while(itr.hasNext()){
+//
+//            String key= itr.next();
+//            Object value = params.get(key);
+//
+//            if (first)
+//                first = false;
+//            else
+//                result.append("&");
+//
+//            result.append(URLEncoder.encode(key, "UTF-8"));
+//            result.append("=");
+//            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+//
+//        }
+//        return result.toString();
+//    }
+//
+//
+//
+//
+//    @Override
+//    public void onBackPressed() {
+//
+//
+//    }
+//
+//
+//    @Override
+//    protected void onStart() {
+//
+//
+//
+//        super.onStart();
+//    }
 }
