@@ -102,11 +102,6 @@ public class EceFragment extends Fragment {
 
 
 
-
-
-
-
-
         //select year spinner
         spinner_year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -314,6 +309,7 @@ public class EceFragment extends Fragment {
         });
 
 
+
         return view;
 
     }
@@ -323,7 +319,6 @@ public class EceFragment extends Fragment {
         startActivity(intent);
 
     }
-
 
 
 }

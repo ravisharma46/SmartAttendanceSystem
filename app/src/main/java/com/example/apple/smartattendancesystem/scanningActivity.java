@@ -61,9 +61,10 @@ public class scanningActivity extends AppCompatActivity {
             barcodeView.setStatusText(result.getText());
             beepManager.playBeepSoundAndVibrate();
             attendance_list.add(result.getText());
-            onPause();
+            //onPause();
+            update_adapter_list();
 
-            onResume();
+           // onResume();
 
 
 
@@ -206,11 +207,6 @@ public class scanningActivity extends AppCompatActivity {
 
         barcodeView.pause();
 
-        attendance_marked_list=(ListView)findViewById(R.id.show_rollno);
-        // create Arrayadapter..... updating the roll no. on every scan in listview
-        ArrayAdapter<String>arrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,attendance_list);
-
-        attendance_marked_list.setAdapter(arrayAdapter);
     }
 
     public void pause(View view) {
@@ -228,7 +224,16 @@ public class scanningActivity extends AppCompatActivity {
     }
 
 
+    public void update_adapter_list() {
 
+        attendance_marked_list=(ListView)findViewById(R.id.show_rollno);
+        // create Arrayadapter..... updating the roll no. on every scan in listview
+        ArrayAdapter<String>arrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,attendance_list);
+
+        attendance_marked_list.setAdapter(arrayAdapter);
+
+
+    }
 
 
     @Override

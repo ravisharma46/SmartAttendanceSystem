@@ -56,7 +56,7 @@ public class CseFragment extends Fragment {
         scan=(Button)view.findViewById(R.id.start_scan_ece);
 
         final String Theory_class[]={"C123","C456","C789","C10 11 12"};
-        final String lab_class[]={"C1","C2","C3","C4","C5","C6","C7","C8","C9","C10","C11","C12"};
+        final String lab_class[]={"C1","C2","C3","C4","C5","C6","C7","C8","C9","C11","C12","C13"};
 
 
 

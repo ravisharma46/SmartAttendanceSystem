@@ -43,17 +43,18 @@
         android:id="@+id/add_rollno"
         android:layout_width="60sp"
         android:layout_height="100sp"
-        android:layout_gravity="end|bottom"
+        android:layout_gravity="bottom|end"
 
         android:layout_margin="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="40dp"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.896"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintHorizontal_bias="0.935"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     
