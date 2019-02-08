@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fffbe6"
     tools:context=".MainActivity">
 
     <EditText
@@ -47,6 +48,8 @@
         android:layout_marginTop="8sp"
         android:layout_marginBottom="268sp"
         android:text="Sign in"
+        android:background="#00695C"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

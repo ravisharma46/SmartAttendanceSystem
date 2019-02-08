@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="375sp"
@@ -12,17 +13,17 @@
     <Spinner
         android:id="@+id/spinner_select_group"
         android:layout_width="179sp"
+        android:layout_height="36sp"
         android:layout_marginLeft="180sp"
-        android:layout_marginTop="80sp"
-        android:layout_height="36sp" />
+        android:layout_marginTop="80sp" />
+
     <TextView
         android:layout_width="200sp"
         android:layout_height="36sp"
-        android:paddingLeft="22sp"
         android:layout_marginTop="80sp"
+        android:paddingLeft="22sp"
         android:text="Select Group"
         android:textSize="24sp" />
-
 
 
     <TextView
@@ -31,14 +32,13 @@
         android:layout_height="36sp"
         android:paddingLeft="22sp"
         android:text="Select Year"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
+
     <Spinner
         android:id="@+id/spinner_select_year"
         android:layout_width="179sp"
-        android:layout_marginLeft="180sp"
-        android:layout_height="36sp"/>
-
-
+        android:layout_height="36sp"
+        android:layout_marginLeft="180sp" />
 
 
     <TextView
@@ -48,13 +48,14 @@
         android:layout_marginTop="40sp"
         android:paddingLeft="22sp"
         android:text="Select Class"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
+
     <Spinner
         android:id="@+id/spinner_select_class"
         android:layout_width="179sp"
+        android:layout_height="36sp"
         android:layout_marginLeft="180sp"
-        android:layout_marginTop="40sp"
-        android:layout_height="36sp"/>
+        android:layout_marginTop="40sp" />
 
 
     <TextView
@@ -64,19 +65,19 @@
         android:layout_marginTop="120sp"
         android:paddingLeft="22sp"
         android:text="Select Date"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
+
     <TextView
         android:id="@+id/date_picker"
         android:layout_width="200sp"
         android:layout_height="36sp"
         android:layout_marginLeft="170sp"
         android:layout_marginTop="120sp"
-        android:text="click to choose date"
-        android:paddingTop="7sp"
         android:paddingLeft="12sp"
-        android:textStyle="bold"
-        android:textSize="18sp"/>
-
+        android:paddingTop="7sp"
+        android:text="click to choose date"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
     <TextView
@@ -86,29 +87,28 @@
         android:layout_marginTop="160sp"
         android:paddingLeft="22sp"
         android:text="Select Time"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
+
     <TextView
         android:id="@+id/time_picker"
         android:layout_width="200sp"
         android:layout_height="36sp"
         android:layout_marginLeft="170sp"
         android:layout_marginTop="160sp"
-        android:text="click to choose time"
-        android:paddingTop="7sp"
         android:paddingLeft="12sp"
-        android:textStyle="bold"
-        android:textSize="18sp"/>
+        android:paddingTop="7sp"
+        android:text="click to choose time"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-<Button
-    android:id="@+id/start_scan_ece"
-    android:layout_width="200sp"
-    android:layout_height="46sp"
-    android:layout_marginTop="260sp"
-    android:layout_marginLeft="80sp"
-    android:text="start Scan"
-    android:textSize="20sp"/>
-
-
+    <Button
+        android:id="@+id/start_scan_ece"
+        android:layout_width="200sp"
+        android:layout_height="46sp"
+        android:layout_marginLeft="80sp"
+        android:layout_marginTop="260sp"
+        android:text="start Scan"
+        android:textSize="20sp" />
 
 
 </FrameLayout>

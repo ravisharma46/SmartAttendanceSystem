@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:padding="10dp"
         tools:context=".MainActivity"
-        android:background="#e9f1ba"
+        android:background="#26A69A"
         >
         <TextView
             android:id="@+id/dialog_title"
@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:text="ADD ROLL NO. BELOW"
             android:padding="5dp"
-            android:background="#d5dda6"
+            android:textColor="@color/black"
+            android:background="#80CBC4"
             android:textSize="15dp"
             />
         <EditText
@@ -37,8 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ADD"
+            android:textColor="@color/white"
             android:layout_alignParentRight="true"
-            android:background="#dde5ad"
+            android:background="#00695C"
             android:layout_below="@id/et_name"
             />
         <Button
@@ -47,8 +49,9 @@
             android:layout_height="wrap_content"
             android:text="CANCEL"
             android:layout_toLeftOf="@id/dialog_positive_btn"
-            android:background="#dde5ad"
+            android:background="#00695C"
             android:layout_marginRight="3dp"
+            android:textColor="@color/white"
             android:layout_alignBaseline="@id/dialog_positive_btn"
             />
 
