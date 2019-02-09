@@ -3,7 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+
+
+
     <group android:checkableBehavior="single">
+
+
         <item
             android:id="@+id/cse_dep"
             android:icon="@drawable/ic_menu_camera"
@@ -24,10 +29,6 @@
 
     <item android:title="Export attendance">
         <menu>
-            <item
-                android:id="@+id/excel_sheet"
-                android:icon="@drawable/ic_menu_share"
-                android:title="excel" />
             <item
                 android:id="@+id/pdf_file"
                 android:icon="@drawable/ic_menu_send"
