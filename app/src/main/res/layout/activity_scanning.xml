@@ -27,7 +27,7 @@
 
     <ListView
         android:id="@+id/show_rollno"
-        android:layout_width="match_parent"
+        android:layout_width="376dp"
         android:layout_height="380dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="145dp"
@@ -44,7 +44,6 @@
         android:layout_width="60sp"
         android:layout_height="100sp"
         android:layout_gravity="bottom|end"
-
         android:layout_margin="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -56,18 +55,7 @@
         app:layout_constraintHorizontal_bias="0.935"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="98dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="60dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/add_rollno"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
 
 </android.support.constraint.ConstraintLayout>
