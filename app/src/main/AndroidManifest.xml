@@ -32,7 +32,10 @@
             android:name=".select_branch"
             android:label="@string/title_activity_select_branch"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".scanningActivity"></activity>
+        <activity android:name=".scanningActivity"
+            android:label="@string/Scanning"
+
+            ></activity>
     </application>
 
 
