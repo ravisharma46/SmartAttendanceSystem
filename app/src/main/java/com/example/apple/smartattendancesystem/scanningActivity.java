@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -66,7 +68,7 @@ public class scanningActivity extends AppCompatActivity {
     private DecoratedBarcodeView barcodeView;
     private BeepManager beepManager;
     private String lastText;
-    private Button submit;
+
     private URL url;
     private String roll_no="";
 
@@ -226,24 +228,9 @@ public class scanningActivity extends AppCompatActivity {
 
         //submit button process...
 
-        submit = (Button) findViewById(R.id.submit_button);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                try {
-//
-//                    url = new URL("http://192.168.43.212:7000/home/attendance/demo");
-//                } catch (MalformedURLException e) {
-//                    Log.e("assign", "problem");
-//                    // Toast.makeText(LoginActivity.this, "Connection Failed", Toast.LENGTH_SHORT).show();
-//                    e.printStackTrace();
-//                }
-//
-//
-//                new SendPostRequest().execute();
-            }
-        });
+
+
     }
 
 
@@ -434,26 +421,6 @@ public class scanningActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -505,8 +472,75 @@ public class scanningActivity extends AppCompatActivity {
 
 
 
+// end Scanning button action
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+         //Inflate the menu; this adds items to the action bar if it is present.
+          getMenuInflater().inflate(R.menu.select_branch, menu);
+          return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+         if (id == R.id.end_scan) {
+
+             AlertDialog.Builder builder= new AlertDialog.Builder(scanningActivity.this);
+             LayoutInflater inflater =getLayoutInflater();
+             View dialog_endScan =inflater.inflate(R.layout.end_scan_dailogalert,null);
 
 
+
+             // Specify alert dialog is not cancelable/not ignorable
+             builder.setCancelable(false);
+
+             // Set the custom layout as alert dialog view
+             builder.setView(dialog_endScan);
+
+             // Get the custom alert dialog view widgets reference
+             Button btn_positive = (Button) dialog_endScan.findViewById(R.id.yes_action);
+             Button btn_negative = (Button) dialog_endScan.findViewById(R.id.no_action);
+
+             // Create the alert dialog
+             final AlertDialog dialog = builder.create();
+
+             btn_positive.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     // Dismiss the alert dialog
+                     dialog.cancel();
+
+
+
+
+                 }
+             });
+
+             // Set negative/no button click listener
+             btn_negative.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     // Dismiss/cancel the alert dialog
+                     //dialog.cancel();
+                     dialog.dismiss();
+                     Toast.makeText(getApplication(),
+                             "NO button clicked", Toast.LENGTH_SHORT).show();
+                 }
+             });
+
+             // Display the custom alert dialog on interface
+             dialog.show();
+
+             return true;
+         }
+
+          return super.onOptionsItemSelected(item);
+    }
 
 
 
