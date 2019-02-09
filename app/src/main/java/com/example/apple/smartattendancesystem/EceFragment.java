@@ -308,7 +308,8 @@ public class EceFragment extends Fragment {
             }
         });
 
-
+       // update action bar title
+        getActivity().setTitle("ECE branch");
 
         return view;
 

@@ -91,11 +91,6 @@ public class download_attendance_pdf extends Fragment {
         downloadID = downloadManager.enqueue(request);
 
 
-
-
-
-
-
     }
 
 
