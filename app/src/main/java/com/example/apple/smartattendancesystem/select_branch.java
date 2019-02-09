@@ -49,27 +49,7 @@ public class select_branch extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.select_branch, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -100,9 +80,7 @@ public class select_branch extends AppCompatActivity
 
         } else if (id == R.id.mae_dep) {
 
-        } else if (id == R.id.excel_sheet) {
-
-        } else if (id == R.id.pdf_file) {
+        }  else if (id == R.id.pdf_file) {
 
             download_attendance_pdf download_attendance= new download_attendance_pdf();
             FragmentManager manager=getSupportFragmentManager();
