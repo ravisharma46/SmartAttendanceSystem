@@ -275,7 +275,8 @@ public class CseFragment extends Fragment {
             }
         });
 
-
+/// update actionbar title
+        getActivity().setTitle("CSE branch");
 
         return view;
     }
