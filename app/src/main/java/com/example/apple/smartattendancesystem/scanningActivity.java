@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -71,6 +73,7 @@ public class scanningActivity extends AppCompatActivity {
 
     private URL url;
     private String roll_no="";
+    private String rollno="";
 
 
 
@@ -123,9 +126,27 @@ public class scanningActivity extends AppCompatActivity {
 
     };
 
+    boolean doubleBackToExitPressedOnce = false;
 
+    @Override
+    public void onBackPressed() {
 
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
 
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,9 +202,9 @@ public class scanningActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         // Dismiss the alert dialog
                         dialog.cancel();
-                        String rollno = et_name.getText().toString();
-                        Toast.makeText(getApplication(),
-                                rollno, Toast.LENGTH_SHORT).show();
+                         rollno = et_name.getText().toString();
+                        //Toast.makeText(getApplication(),
+                          //      rollno, Toast.LENGTH_SHORT).show();
                         // Say hello to the submitter
 
                         if (rollno.length() == 11) {
@@ -241,7 +262,7 @@ public class scanningActivity extends AppCompatActivity {
             url = new URL("http://192.168.43.212:7000/home/attendance/demo");
         } catch (MalformedURLException e) {
             Log.e("assign", "problem");
-            // Toast.makeText(LoginActivity.this, "Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(scanningActivity.this, "Connection Failed", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -352,37 +373,38 @@ public class scanningActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-//            String y="";
-//            String d="";
-//            try {
-//                JSONObject json = new JSONObject(s);
-//                y=json.getString("error");
-//                d=json.getString("data");
-//
-//                Log.e("value of y",y);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            Log.e("servers",s);
-//
-//
-//            if(y.equals("1")){
-//                user_id.setText("");
-//                user_password.setText("");
-//                Toast.makeText(getApplicationContext(), d, Toast.LENGTH_SHORT).show();
-//
-//            }
-//            else if( y.equals("2")){
-//               // user_id.setText("");
-//              //  user_password.setText("");
-//                Toast.makeText(getApplicationContext(), "Welcome Teacher", Toast.LENGTH_SHORT).show();
-//                Log.i("TAG","connection reached here");
-//                Intent intent=new Intent (MainActivity.this,select_branch.class);
-//                startActivity(intent);
-//            }
-//            else{
-//
-//            }
+            String y="";
+            String d="";
+            try {
+                JSONObject json = new JSONObject(s);
+                y=json.getString("error");
+                d=json.getString("data");
+
+                Log.e("value of y",y);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.e("servers",s);
+
+
+            if(y.equals("1")){
+
+               // user_password.setText("");
+                attendance_list.remove(roll_no);
+                Toast.makeText(getApplicationContext(), "Roll no. doesn't exit ", Toast.LENGTH_SHORT).show();
+
+            }
+            else if( y.equals("0")){
+               // user_id.setText("");
+              //  user_password.setText("");
+                Toast.makeText(getApplicationContext(), "attendance done", Toast.LENGTH_SHORT).show();
+                Log.i("TAG","connection reached here");
+              //  Intent intent=new Intent (MainActivity.this,select_branch.class);
+               // startActivity(intent);
+            }
+            else{
+
+            }
 
 
         }
