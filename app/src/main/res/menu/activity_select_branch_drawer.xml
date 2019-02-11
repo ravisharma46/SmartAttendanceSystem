@@ -25,6 +25,10 @@
             android:id="@+id/mae_dep"
             android:icon="@drawable/ic_menu_manage"
             android:title="MAE" />
+        <item
+            android:id="@+id/eee_dep"
+           android:icon="@drawable/ic_menu_share"
+            android:title="EEE"/>
     </group>
 
     <item android:title="Export attendance">
@@ -32,10 +36,10 @@
             <item
                 android:id="@+id/pdf_file"
                 android:icon="@drawable/ic_menu_send"
-                android:title="PDF" />
+                android:title="Download Attendance" />
             <item
                 android:id="@+id/sign_out"
-                android:icon="@drawable/ic_menu_camera"
+                android:icon="@drawable/ic_mr_button_grey"
                 android:title="Sign Out"/>
         </menu>
 

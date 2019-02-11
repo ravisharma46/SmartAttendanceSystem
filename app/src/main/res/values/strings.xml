@@ -8,7 +8,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="Scanning">Scanning card</string>
-    <string name="end_scan">End Scan</string>
+    <string name="end_scan">Submit Attendance</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
