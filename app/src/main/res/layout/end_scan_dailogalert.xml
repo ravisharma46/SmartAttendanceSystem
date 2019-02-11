@@ -21,10 +21,16 @@
             android:layout_height="60sp"
             android:paddingLeft="10sp"
             android:paddingTop="10sp"
-            android:text="Do you really want to end Scanning?"
+            android:text="Do you really want to Submit Attendance?"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="58sp"
+            android:textSize="12sp"
+            android:text="   Once you submit the attendance you can not edit "
+            android:layout_height="20sp" />
 
         <Button
             android:id="@+id/no_action"
