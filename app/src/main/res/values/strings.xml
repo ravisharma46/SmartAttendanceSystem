@@ -19,13 +19,20 @@
         <item>final year</item>
     </string-array>
 
+    <string-array name="select_branch">
+        <item>CSE</item>
+        <item>IT</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>MAE</item>
+    </string-array>
+
 
     <string-array name="ece_select_classMode">
         <item>Theory</item>
         <item>Laboratory</item>
     </string-array>
     <string name="title_activity_scaning">ScaningActivity</string>
-
 
 
 </resources>

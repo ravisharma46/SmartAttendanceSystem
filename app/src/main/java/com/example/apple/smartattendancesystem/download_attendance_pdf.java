@@ -12,7 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -39,6 +42,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class download_attendance_pdf extends Fragment {
 
 
+    private Spinner spinner_group,spinner_year,spinner_class,spinner_branch;
     private Button download,email;
     private  URL url;
     DownloadManager downloadManager;
@@ -54,17 +58,17 @@ public class download_attendance_pdf extends Fragment {
          download= (Button) view.findViewById(R.id.downlnoad);
          email =(Button) view.findViewById(R.id.email_attendance);
 
+        spinner_group = (Spinner) view.findViewById(R.id.spinner_select_group);
+        spinner_year=(Spinner)view.findViewById(R.id.spinner_select_year);
+        spinner_class=(Spinner)view.findViewById(R.id.spinner_select_class);
+        spinner_branch=(Spinner)view.findViewById(R.id.spinner_select_branch);
+
          download.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-
-
                  start_download();
-
-
              }
          });
-
 
          email.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -73,6 +77,62 @@ public class download_attendance_pdf extends Fragment {
              }
          });
 
+     // ECE
+        final String Th_class_ece[]={"E123","E456","E789"};
+        final String la_class_ece[]={"E1","E2","E3","E4","E5","E6","E7","E8","E9"};
+
+     //CSE
+        final String Th_class_cse[]={"C123","C456","C789","C10 11 12"};
+        final String la_class_cse[]={"C1","C2","C3","C4","C5","C6","C7","C8","C9","C11","C12","C13"};
+
+    //MAE
+        final String Th_class_mae[]={"M123","M456","M789"};
+        final String la_class_mae[]={"M1","M2","M3","M4","M5","M6","M7","M8","M9"};
+
+     //EEE
+        final String Th_class_eee[]={"EEE123","EEE456","EEE789"};
+        final String la_class_eee[]={"EEE1","EEE2","EEE3","EEE4","EEE5","EEE6","EEE7","EEE8","EEE9"};
+     //IT
+        final String Th_class_it[]={"IT123","IT456","IT789"};
+        final String la_class_it[]={"IT1","IT2","IT3","IT4","IT5","IT6","IT7","IT8","IT9"};
+
+
+
+        // create adapter array for select year
+        ArrayAdapter<String> adapter_year= new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.ece_select_year));
+
+
+        adapter_year.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_year.setAdapter(adapter_year);
+
+
+
+        // create adapter array for select class mode
+        ArrayAdapter<String> adapter_class= new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.ece_select_classMode));
+
+
+        adapter_class.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_class.setAdapter(adapter_class);
+
+
+        // create adapter array for select branch
+        ArrayAdapter<String> adapter_branch= new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.select_branch));
+
+
+        adapter_branch.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_branch.setAdapter(adapter_branch);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -80,6 +140,9 @@ public class download_attendance_pdf extends Fragment {
 
         return  view;
     }
+
+
+
 
 
 
@@ -232,7 +295,5 @@ public class download_attendance_pdf extends Fragment {
         }
         return result.toString();
     }
-
-
 
 }

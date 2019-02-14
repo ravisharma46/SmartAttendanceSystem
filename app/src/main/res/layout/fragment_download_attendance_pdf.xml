@@ -32,9 +32,9 @@
 
         <Spinner
             android:id="@+id/spinner_select_branch"
-            android:layout_width="179sp"
+            android:layout_width="150sp"
             android:layout_height="36sp"
-            android:layout_marginLeft="150sp" />
+            android:layout_marginLeft="180sp" />
     </android.support.v7.widget.CardView>
 
 
@@ -178,6 +178,7 @@
             android:backgroundTint="#000000"
             android:text="Email Attendance"
             android:textColor="@color/white" />
+        
 
 
     </android.support.v7.widget.CardView>
