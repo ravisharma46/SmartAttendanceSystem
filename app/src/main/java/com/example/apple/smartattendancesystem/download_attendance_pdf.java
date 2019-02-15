@@ -42,7 +42,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class download_attendance_pdf extends Fragment {
 
 
-    private Spinner spinner_group,spinner_year,spinner_class,spinner_branch;
+    private Spinner spinner_group,spinner_year,spinner_class,spinner_branch,spinner_attendance;
     private Button download,email;
     private  URL url;
     DownloadManager downloadManager;
@@ -62,6 +62,7 @@ public class download_attendance_pdf extends Fragment {
         spinner_year=(Spinner)view.findViewById(R.id.spinner_select_year);
         spinner_class=(Spinner)view.findViewById(R.id.spinner_select_class);
         spinner_branch=(Spinner)view.findViewById(R.id.spinner_select_branch);
+        spinner_attendance=(Spinner)view.findViewById(R.id.spinner_select_attendance);
 
          download.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -125,9 +126,196 @@ public class download_attendance_pdf extends Fragment {
         adapter_branch.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_branch.setAdapter(adapter_branch);
 
+        // create adapter array for select attendance
+        ArrayAdapter<String> adapter_attendance= new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.select_attendance));
+
+
+        adapter_attendance.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_attendance.setAdapter(adapter_attendance);
 
 
 
+
+
+        spinner_branch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if(spinner_branch.getSelectedItemPosition()==0){
+
+
+
+                    spinner_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            if(spinner_class.getSelectedItemPosition()==0){
+
+                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
+                                        android.R.layout.simple_list_item_1,Th_class_cse);
+                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner_group.setAdapter(adapter_group);
+                            }
+                            else if(spinner_class.getSelectedItemPosition()==1) {
+                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
+                                        android.R.layout.simple_list_item_1,la_class_cse);
+                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner_group.setAdapter(adapter_group);
+
+                            }
+                            else{
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+
+                }
+
+
+                else if(spinner_branch.getSelectedItemPosition()==1){
+                    spinner_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            if(spinner_class.getSelectedItemPosition()==0){
+
+                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
+                                        android.R.layout.simple_list_item_1,Th_class_it);
+                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner_group.setAdapter(adapter_group);
+                            }
+                            else if(spinner_class.getSelectedItemPosition()==1)  {
+                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
+                                        android.R.layout.simple_list_item_1,la_class_it);
+                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner_group.setAdapter(adapter_group);
+
+                            }
+                            else{
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                }
+
+                else if(spinner_branch.getSelectedItemPosition()==2){
+                    spinner_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            if(spinner_class.getSelectedItemPosition()==0){
+
+                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
+                                        android.R.layout.simple_list_item_1,Th_class_ece);
+                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner_group.setAdapter(adapter_group);
+                            }
+                            else if(spinner_class.getSelectedItemPosition()==1)  {
+                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
+                                        android.R.layout.simple_list_item_1,la_class_ece);
+                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner_group.setAdapter(adapter_group);
+
+                            }
+                            else{
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                }
+                else if(spinner_branch.getSelectedItemPosition()==3){
+                    spinner_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            if(spinner_class.getSelectedItemPosition()==0){
+
+                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
+                                        android.R.layout.simple_list_item_1,Th_class_eee);
+                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner_group.setAdapter(adapter_group);
+                            }
+                            else if(spinner_class.getSelectedItemPosition()==1)  {
+                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
+                                        android.R.layout.simple_list_item_1,la_class_eee);
+                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner_group.setAdapter(adapter_group);
+
+                            }
+                            else{
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                }
+                else if(spinner_branch.getSelectedItemPosition()==4) {
+                    spinner_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            if(spinner_class.getSelectedItemPosition()==0){
+
+                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
+                                        android.R.layout.simple_list_item_1,Th_class_mae);
+                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner_group.setAdapter(adapter_group);
+                            }
+                            else if(spinner_class.getSelectedItemPosition()==1)  {
+                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
+                                        android.R.layout.simple_list_item_1,la_class_mae);
+                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner_group.setAdapter(adapter_group);
+
+                            }else{
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                }
+
+
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
 
