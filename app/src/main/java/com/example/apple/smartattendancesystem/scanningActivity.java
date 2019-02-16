@@ -22,6 +22,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -65,7 +67,12 @@ public class scanningActivity extends AppCompatActivity {
 
     private ListView attendance_marked_list;
     private ArrayList<String>attendance_list;
+    private  FloatingActionButton fab,fab1,fab2;
+    private Animation fabOpen,fabClose, rotateForward,rotateBackward;
+    private Button add,submit;
 
+
+    Boolean isOpen=false;
     private static final String TAG = scanningActivity.class.getSimpleName();
     private DecoratedBarcodeView barcodeView;
     private BeepManager beepManager;
@@ -170,14 +177,35 @@ public class scanningActivity extends AppCompatActivity {
 
         /////////////////////////////////////////////////////////////////////////////////
 
+        fab = findViewById(R.id.add_fab1);
+        add= (Button)findViewById(R.id.add_rollno);
+        submit=(Button) findViewById(R.id.submit_att);
 
-        FloatingActionButton fab = findViewById(R.id.add_rollno);
+
+
+        fabOpen= AnimationUtils.loadAnimation(this,R.anim.fab_open);
+        fabClose= AnimationUtils.loadAnimation(this,R.anim.fab_close);
+
+        rotateForward=AnimationUtils.loadAnimation(this,R.anim.rotate_forward);
+        rotateBackward=AnimationUtils.loadAnimation(this,R.anim.rotate_backward);
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+             animateFab();
+
+            }
+        });
+
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                animateFab();
                 //Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                 //     .setAction("Action", null).show();
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(scanningActivity.this);
 
                 LayoutInflater inflater = getLayoutInflater();
@@ -202,9 +230,9 @@ public class scanningActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         // Dismiss the alert dialog
                         dialog.cancel();
-                         rollno = et_name.getText().toString();
+                        rollno = et_name.getText().toString();
                         //Toast.makeText(getApplication(),
-                          //      rollno, Toast.LENGTH_SHORT).show();
+                        //      rollno, Toast.LENGTH_SHORT).show();
                         // Say hello to the submitter
 
                         if (rollno.length() == 11) {
@@ -242,17 +270,97 @@ public class scanningActivity extends AppCompatActivity {
                 dialog.show();
 
 
+
             }
         });
 
-/////////////////////////////////////////////////////////////////////////
 
-        //submit button process...
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                animateFab();
+
+                AlertDialog.Builder builder= new AlertDialog.Builder(scanningActivity.this);
+                LayoutInflater inflater =getLayoutInflater();
+                View dialog_endScan =inflater.inflate(R.layout.end_scan_dailogalert,null);
+
+
+
+                // Specify alert dialog is not cancelable/not ignorable
+                builder.setCancelable(false);
+
+                // Set the custom layout as alert dialog view
+                builder.setView(dialog_endScan);
+
+                // Get the custom alert dialog view widgets reference
+                Button btn_positive = (Button) dialog_endScan.findViewById(R.id.yes_action);
+                Button btn_negative = (Button) dialog_endScan.findViewById(R.id.no_action);
+
+                // Create the alert dialog
+                final AlertDialog dialog = builder.create();
+
+                btn_positive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Dismiss the alert dialog
+                        dialog.cancel();
+
+
+
+
+                    }
+                });
+
+                // Set negative/no button click listener
+                btn_negative.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Dismiss/cancel the alert dialog
+                        //dialog.cancel();
+                        dialog.dismiss();
+                        Toast.makeText(getApplication(),
+                                "NO button clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                // Display the custom alert dialog on interface
+                dialog.show();
+
+            }
+        });
 
 
 
     }
+
+    public void animateFab(){
+
+        if(isOpen){
+            fab.startAnimation(rotateForward);
+            add.startAnimation(fabClose);
+            submit.startAnimation(fabClose);
+            add.setClickable(false);
+            submit.setClickable(false);
+            isOpen=false;
+        }
+        else{
+            fab.startAnimation(rotateBackward);
+            add.startAnimation(fabOpen);
+            submit.startAnimation(fabOpen);
+            add.setClickable(true);
+            submit.setClickable(true);
+            isOpen=true;
+
+        }
+
+    }
+
+
+
+
+
+
 
 
 
@@ -493,76 +601,6 @@ public class scanningActivity extends AppCompatActivity {
     }
 
 
-
-// end Scanning button action
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-         //Inflate the menu; this adds items to the action bar if it is present.
-          getMenuInflater().inflate(R.menu.select_branch, menu);
-          return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-         if (id == R.id.end_scan) {
-
-             AlertDialog.Builder builder= new AlertDialog.Builder(scanningActivity.this);
-             LayoutInflater inflater =getLayoutInflater();
-             View dialog_endScan =inflater.inflate(R.layout.end_scan_dailogalert,null);
-
-
-
-             // Specify alert dialog is not cancelable/not ignorable
-             builder.setCancelable(false);
-
-             // Set the custom layout as alert dialog view
-             builder.setView(dialog_endScan);
-
-             // Get the custom alert dialog view widgets reference
-             Button btn_positive = (Button) dialog_endScan.findViewById(R.id.yes_action);
-             Button btn_negative = (Button) dialog_endScan.findViewById(R.id.no_action);
-
-             // Create the alert dialog
-             final AlertDialog dialog = builder.create();
-
-             btn_positive.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     // Dismiss the alert dialog
-                     dialog.cancel();
-
-
-
-
-                 }
-             });
-
-             // Set negative/no button click listener
-             btn_negative.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     // Dismiss/cancel the alert dialog
-                     //dialog.cancel();
-                     dialog.dismiss();
-                     Toast.makeText(getApplication(),
-                             "NO button clicked", Toast.LENGTH_SHORT).show();
-                 }
-             });
-
-             // Display the custom alert dialog on interface
-             dialog.show();
-
-             return true;
-         }
-
-          return super.onOptionsItemSelected(item);
-    }
 
 
 
