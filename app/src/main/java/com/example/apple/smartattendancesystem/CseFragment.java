@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -246,6 +247,14 @@ public class CseFragment extends Fragment {
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(date_1==null){
+                    Toast.makeText(getActivity(),"Please Select Date",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(time_1==null){
+                    Toast.makeText(getActivity(),"Please Select Time",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 final String[] items = {"Year    "+select_cse_year, "Class    "+select_cse_classMode,
                         "Group    "+select_cse_group, "Date    "+date_1,"Time    "+time_1};
@@ -258,7 +267,12 @@ public class CseFragment extends Fragment {
                             }
                         });
 
-                builder.setPositiveButton("Start Scan", null);
+                builder.setPositiveButton("Start Scan", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startScan();
+                    }
+                });
                 builder.setNegativeButton("Edit", null);
                 builder.setNeutralButton("CANCEL", null);
                 //   builder.setPositiveButtonIcon(getResources().getDrawable(android.R.drawable.ic_menu_call, getTheme()));
@@ -281,4 +295,10 @@ public class CseFragment extends Fragment {
         return view;
     }
 
+    public void startScan(){
+
+        Intent intent=new Intent(getActivity(),scanningActivity.class);
+        startActivity(intent);
+
+    }
 }
