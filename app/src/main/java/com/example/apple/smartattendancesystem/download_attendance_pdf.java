@@ -45,7 +45,7 @@ public class download_attendance_pdf extends Fragment {
     private Spinner spinner_group,spinner_year,spinner_class,spinner_branch,spinner_attendance;
     private Button download,email;
     private  URL url;
-    DownloadManager downloadManager;
+    private  DownloadManager downloadManager;
     private long downloadID;
 
 
@@ -110,7 +110,7 @@ public class download_attendance_pdf extends Fragment {
 
 
         // create adapter array for select class mode
-        ArrayAdapter<String> adapter_class= new ArrayAdapter<String>(this.getActivity(),
+       final ArrayAdapter<String> adapter_class= new ArrayAdapter<String>(this.getActivity(),
                 android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.ece_select_classMode));
 
 
@@ -143,6 +143,11 @@ public class download_attendance_pdf extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if(spinner_branch.getSelectedItemPosition()==0){
+                    final ArrayAdapter<String> adapter_group_0= new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_list_item_1,Th_class_cse);
+                    adapter_group_0.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_group.setAdapter(adapter_group_0);
+                    spinner_class.setAdapter(adapter_class);
 
 
 
@@ -151,11 +156,10 @@ public class download_attendance_pdf extends Fragment {
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                             if(spinner_class.getSelectedItemPosition()==0){
+                                spinner_group.setAdapter(adapter_group_0);
 
-                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
-                                        android.R.layout.simple_list_item_1,Th_class_cse);
-                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spinner_group.setAdapter(adapter_group);
+
+
                             }
                             else if(spinner_class.getSelectedItemPosition()==1) {
                                 ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
@@ -181,16 +185,21 @@ public class download_attendance_pdf extends Fragment {
 
 
                 else if(spinner_branch.getSelectedItemPosition()==1){
+                  final  ArrayAdapter<String> adapter_group_1= new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_list_item_1,Th_class_it);
+                    adapter_group_1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_group.setAdapter(adapter_group_1);
+                    spinner_class.setAdapter(adapter_class);
+
+
+
                     spinner_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                             if(spinner_class.getSelectedItemPosition()==0){
+                                spinner_group.setAdapter(adapter_group_1);
 
-                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
-                                        android.R.layout.simple_list_item_1,Th_class_it);
-                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spinner_group.setAdapter(adapter_group);
                             }
                             else if(spinner_class.getSelectedItemPosition()==1)  {
                                 ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
@@ -213,16 +222,20 @@ public class download_attendance_pdf extends Fragment {
                 }
 
                 else if(spinner_branch.getSelectedItemPosition()==2){
+                   final ArrayAdapter<String> adapter_group_2= new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_list_item_1,Th_class_ece);
+                    adapter_group_2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_group.setAdapter(adapter_group_2);
+                    spinner_class.setAdapter(adapter_class);
+
                     spinner_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                             if(spinner_class.getSelectedItemPosition()==0){
+                                spinner_group.setAdapter(adapter_group_2);
 
-                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
-                                        android.R.layout.simple_list_item_1,Th_class_ece);
-                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spinner_group.setAdapter(adapter_group);
+
                             }
                             else if(spinner_class.getSelectedItemPosition()==1)  {
                                 ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
@@ -244,16 +257,19 @@ public class download_attendance_pdf extends Fragment {
                     });
                 }
                 else if(spinner_branch.getSelectedItemPosition()==3){
+                  final  ArrayAdapter<String> adapter_group_3= new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_list_item_1,Th_class_eee);
+                    adapter_group_3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_group.setAdapter(adapter_group_3);
+                    spinner_class.setAdapter(adapter_class);
+
                     spinner_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                             if(spinner_class.getSelectedItemPosition()==0){
 
-                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
-                                        android.R.layout.simple_list_item_1,Th_class_eee);
-                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spinner_group.setAdapter(adapter_group);
+                                spinner_group.setAdapter(adapter_group_3);
                             }
                             else if(spinner_class.getSelectedItemPosition()==1)  {
                                 ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
@@ -275,16 +291,20 @@ public class download_attendance_pdf extends Fragment {
                     });
                 }
                 else if(spinner_branch.getSelectedItemPosition()==4) {
+                   final ArrayAdapter<String> adapter_group_4= new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_list_item_1,Th_class_mae);
+                    adapter_group_4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_group.setAdapter(adapter_group_4);
+                    spinner_class.setAdapter(adapter_class);
+
+
                     spinner_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                             if(spinner_class.getSelectedItemPosition()==0){
+                                spinner_group.setAdapter(adapter_group_4);
 
-                                ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
-                                        android.R.layout.simple_list_item_1,Th_class_mae);
-                                adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spinner_group.setAdapter(adapter_group);
                             }
                             else if(spinner_class.getSelectedItemPosition()==1)  {
                                 ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
