@@ -30,7 +30,7 @@
         android:id="@+id/show_rollno"
         android:layout_width="376dp"
         android:layout_height="380dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="204dp"
         android:layout_marginEnd="145dp"
         android:headerDividersEnabled="true"
         android:scrollbars="vertical"
@@ -41,21 +41,46 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/add_rollno"
-        android:layout_width="60sp"
-        android:layout_height="100sp"
+        android:id="@+id/add_fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/white"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="40dp"
-        android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/colorPrimary"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.935"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <Button
+        android:id="@+id/add_rollno"
+        android:layout_width="110sp"
+        android:layout_height="40sp"
+        android:layout_marginEnd="28dp"
+        android:background="#FEDBD0"
+        android:text="Add roll no."
+        android:visibility="invisible"
+        android:textColor="@color/black"
+        android:layout_marginBottom="90sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <Button
+        android:id="@+id/submit_att"
+        android:layout_width="110sp"
+        android:layout_height="40sp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="148dp"
+        android:visibility="invisible"
+        android:text="submit Attendance"
+        android:textColor="@color/black"
+        android:background="#FEDBD0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
 
 
 
