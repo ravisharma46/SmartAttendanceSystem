@@ -9,8 +9,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.zxing.MultiFormatWriter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText user_id,user_password;
     public   String username="";
     public  String password="";
-    //public SharedPreferences sharedPreferences=getSharedPreferences("Myprefrences",Context.MODE_PRIVATE);
-  ///  SharedPreferences.Editor editor;
+    private CheckBox ch_teacher,ch_student;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,37 @@ public class MainActivity extends AppCompatActivity {
         register_button= (Button)findViewById(R.id.register_button);
         user_id=(EditText)findViewById(R.id.userid_text);
         user_password=(EditText)findViewById(R.id.pass_text);
+        ch_student=(CheckBox)findViewById(R.id.ch_S);
+        ch_teacher=(CheckBox) findViewById(R.id.ch_T);
+
+        ch_teacher.setEnabled(true);
+        ch_student.setEnabled(true);
+
+
+        ch_student.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    ch_teacher.setEnabled(false);
+                }
+                else {
+                    ch_teacher.setEnabled(true);
+                }
+
+            }
+        });
+
+        ch_teacher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    ch_student.setEnabled(false);
+                }
+                else{
+                    ch_student.setEnabled(true);
+                }
+            }
+        });
 
 
 
@@ -54,8 +91,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 /////////////////
-                Intent intent=new Intent (MainActivity.this,select_branch.class);
-                startActivity(intent);
+
+                if(!ch_teacher.isChecked() && !ch_student.isChecked()){
+                    Toast.makeText(MainActivity.this,"Select Teacher or Student..!",Toast.LENGTH_SHORT).show();
+                    return;
+               }
+
+
+
+                if(ch_student.isChecked()){
+                    ch_teacher.setClickable(false);
+                    Intent intent1=new Intent (MainActivity.this,barcode_generator.class);
+
+                    startActivity(intent1);
+
+                }
+
+               else if(ch_teacher.isChecked()){
+                    ch_student.setClickable(false );
+                    Intent intent=new Intent (MainActivity.this,select_branch.class);
+                    startActivity(intent);
+                }
+                else{
+
+                }
+
+
                 ////////////
 
 

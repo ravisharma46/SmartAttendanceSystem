@@ -2,34 +2,62 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300sp"
-    android:layout_height="130sp"
+    android:layout_height="160sp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="297sp"
-        android:layout_height="127sp"
+        android:layout_width="300sp"
+        android:layout_height="159sp"
         app:cardBackgroundColor="#E6E2E2"
-        app:cardCornerRadius="12sp"
         app:cardElevation="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <android.support.v7.widget.CardView
+            android:layout_width="270sp"
+            android:layout_marginTop="10sp"
+            app:cardCornerRadius="12sp"
+            app:cardBackgroundColor="@color/black"
+            android:layout_marginLeft="10sp"
+            android:layout_height="30sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginTop="2sp"
+                android:text="Total present  student :-"
+                android:paddingLeft="10sp"
+                android:background="@color/black"
+                android:textSize="18sp"
+                android:layout_height="40sp" />
+            <TextView
+                android:layout_width="40sp"
+                android:id="@+id/total_present"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@color/black"
+                android:textColor="@color/white"
+                android:layout_marginLeft="210sp"
+                android:layout_height="40sp" />
+
+        </android.support.v7.widget.CardView>
+
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="60sp"
+            android:layout_height="50sp"
+            android:layout_marginTop="40sp"
             android:paddingLeft="10sp"
-            android:paddingTop="10sp"
             android:text="Do you really want to Submit Attendance?"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
             android:layout_width="match_parent"
-            android:layout_marginTop="58sp"
+            android:layout_marginTop="88sp"
             android:textSize="12sp"
-            android:text="   Once you submit the attendance you can not edit "
+            android:text="       Once you submit attendance you can not edit..! "
             android:layout_height="20sp" />
 
         <Button
@@ -37,7 +65,7 @@
             android:layout_width="100sp"
             android:layout_height="40sp"
             android:layout_marginLeft="180sp"
-            android:layout_marginTop="80sp"
+            android:layout_marginTop="110sp"
             android:background="@color/black"
             android:text="NO"
             android:textColor="@color/white"
@@ -50,7 +78,7 @@
             android:layout_width="100sp"
             android:layout_height="40sp"
             android:layout_marginLeft="14sp"
-            android:layout_marginTop="80sp"
+            android:layout_marginTop="110sp"
             android:background="@color/black"
             android:text="YES"
             android:textColor="@color/white"

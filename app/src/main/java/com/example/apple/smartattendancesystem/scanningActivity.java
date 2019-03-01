@@ -70,6 +70,7 @@ public class scanningActivity extends AppCompatActivity {
     private  FloatingActionButton fab,fab1,fab2;
     private Animation fabOpen,fabClose, rotateForward,rotateBackward;
     private Button add,submit;
+    private TextView total;
 
 
     Boolean isOpen=false;
@@ -180,6 +181,7 @@ public class scanningActivity extends AppCompatActivity {
         fab = findViewById(R.id.add_fab1);
         add= (Button)findViewById(R.id.add_rollno);
         submit=(Button) findViewById(R.id.submit_att);
+
 
 
 
@@ -296,9 +298,14 @@ public class scanningActivity extends AppCompatActivity {
                 // Get the custom alert dialog view widgets reference
                 Button btn_positive = (Button) dialog_endScan.findViewById(R.id.yes_action);
                 Button btn_negative = (Button) dialog_endScan.findViewById(R.id.no_action);
+                total=(TextView)dialog_endScan.findViewById(R.id.total_present);
 
                 // Create the alert dialog
                 final AlertDialog dialog = builder.create();
+
+                int total_prs=attendance_list.size();
+                String toal_prst=Integer.toString(total_prs);
+                total.setText(toal_prst);
 
                 btn_positive.setOnClickListener(new View.OnClickListener() {
                     @Override
