@@ -11,15 +11,15 @@
 
         <item
             android:id="@+id/cse_dep"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_cse"
             android:title="CSE" />
         <item
             android:id="@+id/it_dep"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_it"
             android:title="IT" />
         <item
             android:id="@+id/ece_dep"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_ece"
             android:title="ECE" />
         <item
             android:id="@+id/mae_dep"
@@ -27,19 +27,19 @@
             android:title="MAE" />
         <item
             android:id="@+id/eee_dep"
-           android:icon="@drawable/ic_menu_share"
+           android:icon="@drawable/ic_eee"
             android:title="EEE"/>
     </group>
 
-    <item android:title="Export attendance">
+    <item android:title="Import attendance">
         <menu>
             <item
                 android:id="@+id/pdf_file"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_download"
                 android:title="Download Attendance" />
             <item
                 android:id="@+id/sign_out"
-                android:icon="@drawable/ic_mr_button_grey"
+                android:icon="@drawable/ic_sign_out"
                 android:title="Sign Out"/>
         </menu>
 

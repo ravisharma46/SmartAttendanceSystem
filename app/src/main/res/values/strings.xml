@@ -27,6 +27,11 @@
         <item>MAE</item>
     </string-array>
 
+    <string-array name="select_attendance">
+        <item>Today</item>
+        <item>All Attendance</item>
+    </string-array>
+
 
     <string-array name="ece_select_classMode">
         <item>Theory</item>
