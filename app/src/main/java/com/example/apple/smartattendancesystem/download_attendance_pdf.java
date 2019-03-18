@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -47,6 +52,7 @@ public class download_attendance_pdf extends Fragment {
     private  URL url;
     private  DownloadManager downloadManager;
     private long downloadID;
+    private ArrayList<String> attribute_arr;
 
 
     @Override
@@ -63,6 +69,13 @@ public class download_attendance_pdf extends Fragment {
         spinner_class=(Spinner)view.findViewById(R.id.spinner_select_class);
         spinner_branch=(Spinner)view.findViewById(R.id.spinner_select_branch);
         spinner_attendance=(Spinner)view.findViewById(R.id.spinner_select_attendance);
+
+        String UID= getActivity().getSharedPreferences("Teacher_id",Context.MODE_PRIVATE).getString("Teacher_key","gdhfhf");
+
+        Log.i("TAG123",UID);
+
+
+        attribute_arr=new ArrayList<>();
 
          download.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -408,10 +421,12 @@ public class download_attendance_pdf extends Fragment {
         protected String doInBackground(String... arg0) {
             try {
 
-
-
-
                 JSONObject postDataParams = new JSONObject();
+
+
+
+
+
 
                 Log.e("params", postDataParams.toString());
 

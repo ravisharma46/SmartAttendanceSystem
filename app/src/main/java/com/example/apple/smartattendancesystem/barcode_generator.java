@@ -1,5 +1,6 @@
 package com.example.apple.smartattendancesystem;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
@@ -17,7 +19,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 public class barcode_generator extends AppCompatActivity {
 
     private ImageView barcodeView;
-    private Button generate_barcode;
+    private Button generate_barcode,signout;
     private EditText rollNo;
 
     @Override
@@ -27,6 +29,7 @@ public class barcode_generator extends AppCompatActivity {
 
         barcodeView= (ImageView) findViewById(R.id.set_barcode);
         generate_barcode=(Button) findViewById(R.id.generate_barcode);
+        signout=(Button) findViewById(R.id.sign_out);
         rollNo= (EditText) findViewById(R.id.rollNo);
 
 
@@ -54,6 +57,17 @@ public class barcode_generator extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent=new Intent (barcode_generator.this,MainActivity.class);
+                Toast.makeText(barcode_generator.this,"Sign Out",Toast.LENGTH_SHORT).show();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 

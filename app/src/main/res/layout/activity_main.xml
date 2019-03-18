@@ -117,13 +117,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+
         <Button
             android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:backgroundTint="#000000"
-            android:text="Sign in"
+            android:text="Google+"
             android:textColor="@color/white" />
 
 

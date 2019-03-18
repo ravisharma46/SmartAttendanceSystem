@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class select_branch extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -92,6 +94,7 @@ public class select_branch extends AppCompatActivity
 
         }
         else if(id==R.id.sign_out){
+            FirebaseAuth.getInstance().signOut();
             Intent intent=new Intent (select_branch.this,MainActivity.class);
             Toast.makeText(select_branch.this,"Sign Out",Toast.LENGTH_SHORT).show();
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
