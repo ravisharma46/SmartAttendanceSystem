@@ -82,6 +82,9 @@ public class scanningActivity extends AppCompatActivity {
     private URL url;
     private String roll_no="";
     private String rollno="";
+    private String url_api="";
+    private  ArrayAdapter<String>arrayAdapter;
+    private boolean submit_flag=false;
 
 
 
@@ -311,7 +314,11 @@ public class scanningActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // Dismiss the alert dialog
-                        dialog.cancel();
+
+                       submit_flag=true;
+                       send_attendance();
+                      //  Intent intent= new Intent(scanningActivity.this,select_branch.class);
+                     //   startActivity(intent);
 
 
 
@@ -374,7 +381,14 @@ public class scanningActivity extends AppCompatActivity {
     public void send_attendance(){
         try {
 
-            url = new URL("http://192.168.43.212:7000/home/attendance/demo");
+            Bundle extras =getIntent().getExtras();
+            if(extras!=null){
+              //  url_api=extras.getString("url");
+            }
+
+           // url=new URL(url_api);
+         //   Log.e("URL",url_api);
+            url = new URL("http://192.168.43.212:7000/home/eceattendance/theory");
         } catch (MalformedURLException e) {
             Log.e("assign", "problem");
             Toast.makeText(scanningActivity.this, "Connection Failed", Toast.LENGTH_SHORT).show();
@@ -412,13 +426,20 @@ public class scanningActivity extends AppCompatActivity {
                 JSONObject postDataParams = new JSONObject();
                 //postDataParams.put("username", username);
 
-                for(int i=0;i<attendance_list.size();i++){
+                if (submit_flag==false){
+                    for(int i=0;i<attendance_list.size();i++){
 
-                    roll_no=attendance_list.get(i);
-                    postDataParams.put("at",roll_no);
+                        roll_no=attendance_list.get(i);
+                        postDataParams.put("code","2");
+                        postDataParams.put("attendance",roll_no);
+                    }
                 }
 
 
+
+               else if(submit_flag==true){
+                    postDataParams.put("code","3");
+                }
 
 
                 // postDataParams.put("password", password);
@@ -484,22 +505,27 @@ public class scanningActivity extends AppCompatActivity {
             catch(Exception e){
                 return new String("Exception: " + e.getMessage());
             }
+
+
         }
 
         @Override
         protected void onPostExecute(String s) {
+            Log.e("attservers",s);
             String y="";
             String d="";
+
             try {
                 JSONObject json = new JSONObject(s);
                 y=json.getString("error");
-                d=json.getString("data");
+               d=json.getString("data");
 
                 Log.e("value of y",y);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e("servers",s);
+
+
 
 
             if(y.equals("1")){
@@ -507,6 +533,9 @@ public class scanningActivity extends AppCompatActivity {
                // user_password.setText("");
                 attendance_list.remove(roll_no);
                 Toast.makeText(getApplicationContext(), "Roll no. doesn't exit ", Toast.LENGTH_SHORT).show();
+                arrayAdapter.notifyDataSetChanged();
+                attendance_marked_list.setAdapter(arrayAdapter);
+
 
             }
             else if( y.equals("0")){
@@ -516,6 +545,14 @@ public class scanningActivity extends AppCompatActivity {
                 Log.i("TAG","connection reached here");
               //  Intent intent=new Intent (MainActivity.this,select_branch.class);
                // startActivity(intent);
+
+                if (submit_flag==true){
+                    submit_flag=false;
+                    Intent intent= new Intent(scanningActivity.this,select_branch.class);
+                    onDestroy();
+                       startActivity(intent);
+
+                }
             }
             else{
 
@@ -594,7 +631,7 @@ public class scanningActivity extends AppCompatActivity {
 
        attendance_marked_list=(ListView)findViewById(R.id.show_rollno);
         // create Arrayadapter..... updating the roll no. on every scan in listview
-        ArrayAdapter<String>arrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,attendance_list);
+        arrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,attendance_list);
 
         attendance_marked_list.setAdapter(arrayAdapter);
 
@@ -607,10 +644,8 @@ public class scanningActivity extends AppCompatActivity {
         return barcodeView.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
     }
 
-
-
-
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

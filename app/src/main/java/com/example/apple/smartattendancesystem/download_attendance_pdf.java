@@ -33,6 +33,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -373,23 +374,35 @@ public class download_attendance_pdf extends Fragment {
 
         File file= new File(getActivity().getExternalFilesDir(null),"pro.pdf");
 
+//
+//        Uri uri = Uri.parse("http://www.gadgetsaint.com/wp-content/uploads/2016/11/cropped-web_hi_res_512.png");
+//       // Uri uri = Uri.parse("http://192.168.43.212:7000/home/download/cseattendance");
+//
+//       // Uri uri = Uri.parse("http://192.168.43.212:7000/ravi/template/ravip.pdf");
+//        DownloadManager.Request request = new DownloadManager.Request(uri)
+//                .setTitle("atten File")
+//                .setDescription("Downloading")
+//                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+//\\                .setDestinationUri(Uri.fromFile(file))
+//                .setAllowedOverMetered(true)
+//                .setAllowedOverRoaming(true);
+//        DownloadManager downloadManager= (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+//        downloadID = downloadManager.enqueue(request);
 
-       // Uri uri = Uri.parse("http://192.168.43.212:8080/ravip.pdf");
-        Uri uri = Uri.parse("http://b6094894.ngrok.io/ravip.pdf");
 
-       // Uri uri = Uri.parse("http://192.168.43.212:7000/ravi/template/ravip.pdf");
-        DownloadManager.Request request = new DownloadManager.Request(uri)
-                .setTitle("atten File")
-                .setDescription("Downloading")
-                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .setDestinationUri(Uri.fromFile(file))
-                .setAllowedOverMetered(true)
-                .setAllowedOverRoaming(true);
+     Uri Download_Uri = Uri.parse("http://www.gadgetsaint.com/wp-content/uploads/2016/11/cropped-web_hi_res_512.png");
+
+        DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+        request.setAllowedOverRoaming(false);
+        request.setTitle("GadgetSaint Downloading " + "Sample" + ".png");
+        request.setDestinationUri(Uri.fromFile(file));
+        request.setDescription("Downloading " + "Sample" + ".png");
+        request.setVisibleInDownloadsUi(true);
+      //  request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/GadgetSaint/"  + "/" + "Sample" + ".png");
 
 
-        DownloadManager downloadManager= (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-        downloadID = downloadManager.enqueue(request);
-
+      //  refid = downloadManager.enqueue(request);
 
     }
 

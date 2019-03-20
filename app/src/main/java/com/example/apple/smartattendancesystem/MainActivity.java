@@ -175,8 +175,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+        /////
+        Intent intent=new Intent (MainActivity.this,select_branch.class);
+        startActivity(intent);
+        ///
+
+
+
+       // Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        //startActivityForResult(signInIntent, RC_SIGN_IN);
     }
     @Override
     public void onStart() {

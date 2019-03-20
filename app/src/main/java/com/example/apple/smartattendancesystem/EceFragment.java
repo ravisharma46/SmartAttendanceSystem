@@ -70,12 +70,18 @@ public class EceFragment extends Fragment {
     private URL url;
     private ArrayList<String>attribute_arr;
 
-    private String scanContent;
+    private String data="";
+    private int th_prt_sel;
 
     public EceFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onStart() {
+        attribute_arr.clear();
+        super.onStart();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -132,7 +138,6 @@ public class EceFragment extends Fragment {
                 // your code here
 
                 select_ece_year=parentView.getItemAtPosition(position).toString();
-                attribute_arr.add(select_ece_year);
                 Toast.makeText(getActivity(),"You have selected "+select_ece_year,Toast.LENGTH_SHORT).show();
 
 
@@ -161,19 +166,22 @@ public class EceFragment extends Fragment {
                     android.R.layout.simple_list_item_1,Theory_class);
                     adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                      spinner_group.setAdapter(adapter_group);
+                     th_prt_sel=0;
                 }
-              else  {
+              else  if(spinner_class.getSelectedItemPosition()==1){
                     ArrayAdapter<String> adapter_group= new ArrayAdapter<String>(getActivity(),
                             android.R.layout.simple_list_item_1,lab_class);
                     adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner_group.setAdapter(adapter_group);
+                    th_prt_sel=1;
 
                 }
 
 
 
                 select_ece_classMode=parentView.getItemAtPosition(position).toString();
-                attribute_arr.add(select_ece_classMode);
+
+
 
                 Toast.makeText(getActivity(),"You have selected "+select_ece_classMode+" Class",Toast.LENGTH_SHORT).show();
 
@@ -201,7 +209,9 @@ public class EceFragment extends Fragment {
                 // your code here
 
                 select_ece_group=parentView.getItemAtPosition(position).toString();
-                attribute_arr.add(select_ece_group);
+
+
+
                 Toast.makeText(getActivity(),"You have selected "+select_ece_group+" group",Toast.LENGTH_SHORT).show();
 
 
@@ -234,7 +244,7 @@ public class EceFragment extends Fragment {
                         date.setText(dayOfMonth + "/"
                                 + (monthOfYear + 1) + "/" + year);
                         date_1=date.getText().toString();
-                        attribute_arr.add(date_1);
+                       // attribute_arr.add(date_1);
 
                     }
                 }, mYear, mMonth, mDay);
@@ -279,7 +289,7 @@ public class EceFragment extends Fragment {
                         }
 
                         time_1=time.getText().toString();
-                        attribute_arr.add(time_1);
+                       // attribute_arr.add(time_1);
 
 
                     }
@@ -327,6 +337,14 @@ public class EceFragment extends Fragment {
                 builder.setPositiveButton("Start Scan", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        attribute_arr.add(select_ece_year);
+                        attribute_arr.add(select_ece_classMode);
+                        attribute_arr.add(select_ece_group);
+                        attribute_arr.add(date_1);
+                        attribute_arr.add(time_1);
+
+
                         startScan();
                     }
                 });
@@ -361,6 +379,8 @@ public class EceFragment extends Fragment {
 
         send_attributes();
         Intent intent=new Intent(getActivity(),scanningActivity.class);
+        intent.putExtra("url",url);
+
 
         startActivity(intent);
 
@@ -369,9 +389,16 @@ public class EceFragment extends Fragment {
     public void send_attributes(){
         try {
 
-            url = new URL("http://192.168.43.212:7000/home/cseattendance/theory");
+            if(th_prt_sel==0){
+                url = new URL("http://192.168.43.212:7000/home/eceattendance/theory");
+            }
+            else if(th_prt_sel==1)
+            {
+                url = new URL("http://192.168.43.212:7000/home/eceattendance/practical");
+            }
+
         } catch (MalformedURLException e) {
-            Log.e("assign", "problem");
+            Log.i("assign", "problem");
             Toast.makeText(getActivity(), "Connection Failed", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
@@ -389,47 +416,51 @@ public class EceFragment extends Fragment {
         protected String doInBackground(String... arg0) {
             try {
 
-
-                attribute_arr.add("texh12");
+              attribute_arr.add("txt123");
+              attribute_arr.add("1");
 
 
                 //username = user_id.getText().toString();
                 //  username=user_id.getText().toString();
                 //  password = user_password.getText().toString();
-
                 JSONObject postDataParams = new JSONObject();
                 //postDataParams.put("username", username);
 
                 Log.i("ARRAY:",attribute_arr.toString());
-                for(int i=0;i<=attribute_arr.size();i++){
 
-                    String data=attribute_arr.get(i);
-                       if(i==0){
-                           postDataParams.put("year",data);
-                       }
-                       else if(i==1){
-                           postDataParams.put("class_mode",data);
-                       }
-                       else if(i==2){
-                           postDataParams.put("group",data);
-                       }
-                       else if(i==3){
-                           postDataParams.put("date",data);
-                       }
-                       else if(i==4){
-                           postDataParams.put("time",data);
-                       }
-                       else if(i==5){
-                           postDataParams.put("teacher_id",data);
-                       }
-                   // postDataParams.put(keys,data);
-                    //postDataParams.put("abc",data);
-                }
+                for(int i=0;i<attribute_arr.size();i++){
+
+                    data=attribute_arr.get(i);
+                    if(i==0){
+                        postDataParams.put("year",data);
+                    }
+                    else if(i==1){
+                        postDataParams.put("class_mode",data);
+                    }
+                   else if(i==2){
+                        postDataParams.put("group",data);
+                    }
+                  else  if(i==3){
+                        postDataParams.put("date",data);
+                    }
+                  else  if(i==4){
+                        postDataParams.put("time",data);
+                    }
+                    else if(i==5){
+                        postDataParams.put("teacher_id",data);
+                    }
+                    else{
+                        postDataParams.put("code",data);
+                    }
+
+
+               }
+
+              // postDataParams.put("code","01");
 
 
 
-
-                // postDataParams.put("password", password);
+                //postDataParams.put("password", "raaavvii");
                 Log.e("params", postDataParams.toString());
                 /// editor= sharedPreferences.edit();
                 // SharedPreferences.Editor editor = getSharedPreferences("Teachers", MODE_PRIVATE).edit();
@@ -514,13 +545,13 @@ public class EceFragment extends Fragment {
 
                 // user_password.setText("");
                // attendance_list.remove(roll_no);
-                Toast.makeText(getActivity(), "There is problem", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getApplicationContext(), "Roll no. doesn't exit ", Toast.LENGTH_SHORT).show();
 
             }
             else if( y.equals("0")){
                 // user_id.setText("");
                 //  user_password.setText("");
-                Toast.makeText(getActivity(), "data sending to server", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "attendance done", Toast.LENGTH_SHORT).show();
                 Log.i("TAG","connection reached here");
                 //  Intent intent=new Intent (MainActivity.this,select_branch.class);
                 // startActivity(intent);
