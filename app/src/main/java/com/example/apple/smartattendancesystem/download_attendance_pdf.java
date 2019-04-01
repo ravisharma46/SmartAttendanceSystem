@@ -2,7 +2,10 @@ package com.example.apple.smartattendancesystem;
 
 
 import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +44,8 @@ import java.util.Iterator;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import static android.content.Context.DOWNLOAD_SERVICE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +59,38 @@ public class download_attendance_pdf extends Fragment {
     private  DownloadManager downloadManager;
     private long downloadID;
     private ArrayList<String> attribute_arr;
+    private ArrayList<String> string_data;
+    private  String select_group,select_year,select_classMode,select_branch;
+
+
+
+
+
+    private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //Fetching the download id received with the broadcast
+            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            //Checking if the received broadcast is for our enqueued download by matching download id
+            if (downloadID == id) {
+                Toast.makeText(getActivity(), "Download Completed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getContext().unregisterReceiver(onDownloadComplete);
+    }
+
+
+
+
+
+
 
 
     @Override
@@ -61,6 +98,11 @@ public class download_attendance_pdf extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          View view= inflater.inflate(R.layout.fragment_download_attendance_pdf, container, false);
+
+
+        getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+
+
 
          download= (Button) view.findViewById(R.id.downlnoad);
          email =(Button) view.findViewById(R.id.email_attendance);
@@ -77,6 +119,7 @@ public class download_attendance_pdf extends Fragment {
 
 
         attribute_arr=new ArrayList<>();
+        string_data=new ArrayList<>();
 
          download.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -162,6 +205,7 @@ public class download_attendance_pdf extends Fragment {
                     adapter_group_0.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner_group.setAdapter(adapter_group_0);
                     spinner_class.setAdapter(adapter_class);
+                    select_branch=adapterView.getItemAtPosition(i).toString();
 
 
 
@@ -171,6 +215,7 @@ public class download_attendance_pdf extends Fragment {
 
                             if(spinner_class.getSelectedItemPosition()==0){
                                 spinner_group.setAdapter(adapter_group_0);
+                                select_group=adapterView.getItemAtPosition(i).toString();
 
 
 
@@ -180,6 +225,7 @@ public class download_attendance_pdf extends Fragment {
                                         android.R.layout.simple_list_item_1,la_class_cse);
                                 adapter_group.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 spinner_group.setAdapter(adapter_group);
+                                select_group=adapterView.getItemAtPosition(i).toString();
 
                             }
                             else{
@@ -372,37 +418,23 @@ public class download_attendance_pdf extends Fragment {
 
     public void start_download(){
 
-        File file= new File(getActivity().getExternalFilesDir(null),"pro.pdf");
+        File file=new File(getActivity().getExternalFilesDir(null),"Dummy");
+        /*
+        Create a DownloadManager.Request with all the information necessary to start the download
 
-//
-//        Uri uri = Uri.parse("http://www.gadgetsaint.com/wp-content/uploads/2016/11/cropped-web_hi_res_512.png");
-//       // Uri uri = Uri.parse("http://192.168.43.212:7000/home/download/cseattendance");
-//
-//       // Uri uri = Uri.parse("http://192.168.43.212:7000/ravi/template/ravip.pdf");
-//        DownloadManager.Request request = new DownloadManager.Request(uri)
-//                .setTitle("atten File")
-//                .setDescription("Downloading")
-//                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-//\\                .setDestinationUri(Uri.fromFile(file))
-//                .setAllowedOverMetered(true)
-//                .setAllowedOverRoaming(true);
-//        DownloadManager downloadManager= (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-//        downloadID = downloadManager.enqueue(request);
+        http://192.168.43.212:7000/home/download/cseattendance
+         */
+        DownloadManager.Request request=new DownloadManager.Request(Uri.parse("http://ilabs.uw.edu/sites/default/files/sample_0.pdf"))
+                .setTitle("Dummy File")// Title of the Download Notification
+                .setDescription("Downloading")// Description of the Download Notification
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)// Visibility of the download Notification
+                .setDestinationUri(Uri.fromFile(file))// Uri of the destination file
+                .setRequiresCharging(false)// Set if charging is required to begin the download
+                .setAllowedOverMetered(true)// Set if download is allowed on Mobile network
+                .setAllowedOverRoaming(true);// Set if download is allowed on roaming network
 
-
-     Uri Download_Uri = Uri.parse("http://www.gadgetsaint.com/wp-content/uploads/2016/11/cropped-web_hi_res_512.png");
-
-        DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-        request.setAllowedOverRoaming(false);
-        request.setTitle("GadgetSaint Downloading " + "Sample" + ".png");
-        request.setDestinationUri(Uri.fromFile(file));
-        request.setDescription("Downloading " + "Sample" + ".png");
-        request.setVisibleInDownloadsUi(true);
-      //  request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/GadgetSaint/"  + "/" + "Sample" + ".png");
-
-
-      //  refid = downloadManager.enqueue(request);
+        DownloadManager downloadManager= (DownloadManager)getActivity().getSystemService(DOWNLOAD_SERVICE);
+        downloadID = downloadManager.enqueue(request);// enqueue puts the download request in the queue.
 
     }
 
