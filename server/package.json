@@ -1,0 +1,25 @@
+{
+  "name": "scan",
+  "version": "1.0.0",
+  "description": "scanner app backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ravi",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "html-pdf": "^2.2.0",
+    "mysql": "^2.16.0",
+    "nodemailer": "^5.1.1",
+    "nodemon": "^1.18.9",
+    "path": "^0.12.7",
+    "pdf2json": "^1.1.8",
+    "sendmail": "^1.4.1",
+    "server": "^1.0.18",
+    "template-pdf-generator": "^1.0.2"
+  }
+}

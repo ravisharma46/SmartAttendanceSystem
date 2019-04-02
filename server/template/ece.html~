@@ -1,0 +1,48 @@
+<html>
+<head>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+}
+th {
+  text-align: left;
+}
+</style>
+</head>
+<body>
+
+
+<p><h1 style="font-size:25px;color:red;">ATTENDANCE OF ELECTRONICS AND COMMUNICATION.</h1> <img src="mait.png" width="150" height="130"> </p>
+
+<table style="width:100%">
+  <tr>
+    <th>Sno</th>
+    <th>Rollno</th> 
+    <th>Name</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>80</td>
+  </tr>
+</table>
+
+</body>
+
+</html>
