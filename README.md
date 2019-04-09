@@ -8,3 +8,5 @@ Student list are already stored in database in table form the scanner gives the 
 
 Here we are using at backend node.js to marked attendance in mySql database.
 Teacher can download the attendance any time and as well as they can email themselves.
+
+Video Link of App:- https://drive.google.com/open?id=1-0wNMLCUvb46uSS9FQxpJBLVQICOYaqS
